@@ -32,18 +32,32 @@ or
 
 **Rack::Sendfile**
 
+Sets server specific X-Sendfile header.
+
 **Rack::Lock**
+
+Sets env["rack.multithread"] flag to false and wraps the application within a Mutex.
 
 **Rack::Runtime**
 
+Sets an X-Runtime header, containing the time (in seconds) taken to execute the request.
+
 **Rack::MethodOverride**
+
+Allows the method to be overridden if params[:_method] is set. 
+This is the middleware which supports the PUT and DELETE HTTP method types.
 
 **Rack::Head**
 
+Converts HEAD requests to GET requests and serves them as so.
+
 **Rack::ConditionalGet**
+
+Adds support for "Conditional GET" so that server responds with nothing if page wasn't changed.
 
 **Rack::ETag**
 
+Adds ETag header on all String bodies. ETags are used to validate cache.
 
 
 
@@ -91,7 +105,7 @@ run Rails.application.routes
 
 ## Alternatives
 
-- the_metal (github: [tenderlove/the_metal](https://github.com/tenderlove/the_metal)) - a spike for thoughts about Rack 2.0 by Aaron Patterson
+- **the_metal** (github: [tenderlove/the_metal](https://github.com/tenderlove/the_metal)) - a spike for thoughts about Rack 2.0 by Aaron Patterson
 
 
 
