@@ -99,32 +99,35 @@ use Rack::commonLogger, ???
 
 
 
-**Rack::Sendfile**  - _rails_
+**Rack::Sendfile** (github: [rack/lib/rack/sendfile.rb](https://github.com/rack/rack/blob/master/lib/rack/sendfile.rb)) - _rails_
 
 Sets server specific X-Sendfile header.
 
-**Rack::Lock** - _rails_
+**Rack::Lock** (github: [rack/lib/rack/lock.rb](https://github.com/rack/rack/blob/master/lib/rack/lock.rb)) - _rails_
 
 Sets env["rack.multithread"] flag to false and wraps the application within a Mutex.
 
-**Rack::Runtime**  -  _rails_
+**Rack::Runtime** (github: [rack/lib/rack/runtime.rb](https://github.com/rack/rack/blob/master/lib/rack/runtime.rb)) -  _rails_
 
 Sets an X-Runtime header, containing the time (in seconds) taken to execute the request.
 
-**Rack::MethodOverride** -  _rails_
+**Rack::MethodOverride** (github: [rack/lib/rack/method_override.rb](https://github.com/rack/rack/blob/master/lib/rack/method_override.rb)) -  _rails_
 
 Allows the method to be overridden if params[:_method] is set. 
 This is the middleware which supports the PUT and DELETE HTTP method types.
 
-**Rack::Head**  - _rails_
+**Rack::Head** (github: [rack/lib/rack/head.rb](https://github.com/rack/rack/blob/master/lib/rack/head.rb))  - _rails_
 
 Converts HEAD requests to GET requests and serves them as so.
 
-**Rack::ConditionalGet**  - _rails_
 
-Adds support for "Conditional GET" so that server responds with nothing if page wasn't changed.
+**Rack::ConditionalGet** (github: [rack//lib/rack/conditional_get.rb](https://github.com/rack/rack/blob/master/lib/rack/conditional_get.rb))  - _rails_
 
-**Rack::ETag**  - _rails_
+Adds support for "Conditional GET" using If-None-Match and If-Modified-Since
+so that server responds with nothing if page wasn't changed.
+
+
+**Rack::ETag** (github: [rack/lib/rack/etag.rb](https://github.com/rack/rack/blob/master/lib/rack/etag.rb))  - _rails_
 
 Adds ETag header on all String bodies. ETags are used to validate cache.
 
