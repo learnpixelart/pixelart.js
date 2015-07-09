@@ -41,6 +41,27 @@ or
 
 ## Middleware
 
+Example:
+
+~~~
+class ResponseTimer
+  def initialize(app)
+    @app = app
+  end
+  
+  def call(env)
+    start = Time.now
+    status, headers, response = @app.call(env)
+    stop = Time.now
+    if headers["Content-Type"].include? "text/html"
+      [status, headers, "<!-- Response Time: #{stop - start} -->\n" + response.body]
+    else
+      [status, headers, response]
+    end
+  end
+end
+~~~
+
 
 **Rack::ShowExceptions**
 
