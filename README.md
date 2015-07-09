@@ -17,51 +17,76 @@ _A Ruby Webserver Interface - mix-n-match web servers and web apps; stack web ap
 Simple App Examples:
 
 ~~~
-Proc.new { |env| ['200', {'Content-Type' => 'text/html'}, ['A barebones rack app.']] }
+class HelloWorld
+  def call(env)
+    [200, {"Content-Type" => "text/plain"}, ["Hello, world!"]]
+  end
+end
 ~~~
 
 or
 
 ~~~
-->(env) { ['200', {'Content-Type' => 'text/html'}, ['A barebones rack app.']] }
+Proc.new { |env| [200, {"Content-Type" => "text/plain"}, ["Hello, world!"]] }
 ~~~
+
+or
+
+~~~
+->(env) { [200, {"Content-Type" => "text/plain"}, ["Hello, world!"]] }
+~~~
+
 
 
 
 ## Middleware
 
-**Rack::Sendfile**
+
+**Rack::ShowExceptions**
+
+Catches all thrown exceptions and wraps them nicely in an helpful 500-page.
+
+**Rack::CommonLogger**
+
+Does Apache-style logs.
+
+**Rack::URLMap**
+
+Redirects to different Rack applications depending on the path and host (a very simple router).
+
+
+**Rack::Sendfile**  _rails_
 
 Sets server specific X-Sendfile header.
 
-**Rack::Lock**
+**Rack::Lock** _rails_
 
 Sets env["rack.multithread"] flag to false and wraps the application within a Mutex.
 
-**Rack::Runtime**
+**Rack::Runtime** _rails_
 
 Sets an X-Runtime header, containing the time (in seconds) taken to execute the request.
 
-**Rack::MethodOverride**
+**Rack::MethodOverride**  _rails_
 
 Allows the method to be overridden if params[:_method] is set. 
 This is the middleware which supports the PUT and DELETE HTTP method types.
 
-**Rack::Head**
+**Rack::Head** _rails_
 
 Converts HEAD requests to GET requests and serves them as so.
 
-**Rack::ConditionalGet**
+**Rack::ConditionalGet**  _rails_
 
 Adds support for "Conditional GET" so that server responds with nothing if page wasn't changed.
 
-**Rack::ETag**
+**Rack::ETag**  _rails_
 
 Adds ETag header on all String bodies. ETags are used to validate cache.
 
 
 
-### Rails and Rack
+### Rails on Rack
 
 - [Rails on Rack Guide](http://guides.rubyonrails.org/rails_on_rack.html)
 
