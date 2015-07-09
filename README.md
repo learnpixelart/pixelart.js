@@ -62,48 +62,90 @@ class ResponseTimer
 end
 ~~~
 
+**Rack::File** (github: [rack/lib/rack/file.rb](https://github.com/rack/rack/blob/master/lib/rack/file.rb))
 
-**Rack::ShowExceptions**
+Serves static files below the root directory given, according to the
+path info of the Rack request e.g. when Rack::File.new("/etc") is used, 
+you can access 'passwd' file as http://localhost:9292/passwd
 
-Catches all thrown exceptions and wraps them nicely in an helpful 500-page.
+Note: Handlers can detect if bodies are a Rack::File, and use mechanisms
+like sendfile on the path.
 
-**Rack::CommonLogger**
+Example:
 
-Does Apache-style logs.
+~~~
+use Rack::File, ??
+~~~
 
-**Rack::URLMap**
+**Rack::ShowExceptions** (github: [rack/lib/rack/show_exceptions.rb](https://github.com/rack/rack/blob/master/lib/rack/show_exceptions.rb))
 
-Redirects to different Rack applications depending on the path and host (a very simple router).
+Catches all exceptions raised from the app it wraps; shows a useful backtrace with the sourcefile and
+clickable context, the whole Rack environment and the request data in an helpful 500-page.
+
+~~~
+use Rack::ShowExceptions
+~~~
+
+**Rack::CommonLogger** (github: [rack/lib/rack/common_logger.rb](https://github.com/rack/rack/blob/master/lib/rack/common_logger.rb))
+
+Does Apache-style logs. Note: If the logger c'tor argument is nil, CommonLogger will fall back rack.errors, which is
+an instance of Rack::NullLogger. logger can be any class, including the standard library Logger, and is
+expected to have either write or << method, which accepts the CommonLogger::FORMAT.
+
+~~~
+use Rack::commonLogger, ???
+~~~
 
 
-**Rack::Sendfile**  _rails_
+
+
+**Rack::Sendfile**  - _rails_
 
 Sets server specific X-Sendfile header.
 
-**Rack::Lock** _rails_
+**Rack::Lock** - _rails_
 
 Sets env["rack.multithread"] flag to false and wraps the application within a Mutex.
 
-**Rack::Runtime** _rails_
+**Rack::Runtime**  -  _rails_
 
 Sets an X-Runtime header, containing the time (in seconds) taken to execute the request.
 
-**Rack::MethodOverride**  _rails_
+**Rack::MethodOverride** -  _rails_
 
 Allows the method to be overridden if params[:_method] is set. 
 This is the middleware which supports the PUT and DELETE HTTP method types.
 
-**Rack::Head** _rails_
+**Rack::Head**  - _rails_
 
 Converts HEAD requests to GET requests and serves them as so.
 
-**Rack::ConditionalGet**  _rails_
+**Rack::ConditionalGet**  - _rails_
 
 Adds support for "Conditional GET" so that server responds with nothing if page wasn't changed.
 
-**Rack::ETag**  _rails_
+**Rack::ETag**  - _rails_
 
 Adds ETag header on all String bodies. ETags are used to validate cache.
+
+
+
+
+### Routing
+
+**Rack::URLMap** (github: [rack/lib/rack/urlmap.rb](https://github.com/rack/rack/blob/master/lib/rack/urlmap.rb))
+
+A very simple router - redirects to different Rack applications depending on the path and host.
+C'tor takes a hash mapping urls or paths to apps, and dispatches accordingly.
+Support for HTTP/1.1 host names exists if the URLs start with http:// or https://.
+
+URLMap modifies the SCRIPT_NAME and PATH_INFO such that the part
+relevant for dispatch is in the SCRIPT_NAME, and the rest in the
+PATH_INFO.  This should be taken care of when you need to
+reconstruct the URL in order to create links.
+
+Note: URLMap dispatches in such a way that the longest paths are tried first, since they are most specific.
+
 
 
 
