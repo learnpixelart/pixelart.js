@@ -104,7 +104,7 @@ contract MyToken {
 ```
 
 Note: For now there's no magic type inference for function signatures -
-you MUST annotate all ruby function.
+you MUST annotate all ruby functions.
 Example:
 
 ``` ruby
