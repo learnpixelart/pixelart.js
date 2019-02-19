@@ -113,21 +113,21 @@ def setup
 end
 
 # @sig (string, uint) private
-def _create_zombie( name, dna )
+def create_zombie( name, dna )
   id = @zombies.push( Zombie.new( name, dna)) - 1
   log NewZombie.new( id, name, dna )
 end
 
 # @sig (string) private view returns (uint) 
-def _generate_random_dna( str )
+def generate_random_dna( str )
   rand = hex_to_i( sha256( str ) )
   rand % DNA_MODULUS
 end
 
 # @sig (string) public
 def create_random_zombie( name ) 
-  rand_dna = _generate_random_dna( name )
-  _create_zombie( name, rand_dna )
+  rand_dna = generate_random_dna( name )
+  create_zombie( name, rand_dna )
 end
 ```
 
