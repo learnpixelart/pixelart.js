@@ -2,7 +2,7 @@
 New to (Secure) Ruby? See the [Red Paper](https://github.com/s6ruby/redpaper)!
 
 
-# (Secure) Ruby to Solidity Cross-Compiler Cheat Sheet / White Paper
+# (Secure) Ruby to Solidity (Source-to-Source) Cross-Compiler Cheat Sheet / White Paper
 
 
 ## By Example
