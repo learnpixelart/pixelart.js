@@ -63,7 +63,7 @@ contract Greeter {
 # Simple Storage
 
 def setup
-  @stored_data = 0
+  @stored_data = UInt(0)
 end
 
 # @sig (uint) public
