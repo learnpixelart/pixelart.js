@@ -56,6 +56,42 @@ contract Greeter {
 }
 ```
 
+**Simple Storage**
+
+``` ruby
+####################
+# Simple Storage
+
+def setup
+  @stored_data = 0
+end
+
+# @sig (uint) public
+def set( x )
+  @stored_data = x
+end
+
+# @sig () public view returns (uint)
+def get
+  @stored_data
+end
+```
+
+gets cross-compiled to:
+
+``` solidity
+contract SimpleStorage {
+    uint storedData;
+
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+```
 
 **Mint Your Own Money - Minimal Viable Token**
 
