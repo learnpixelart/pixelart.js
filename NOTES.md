@@ -26,7 +26,7 @@ RETIRED, see Vyper
 _Lisp-like_
 
 **Pyramid Scheme**  ★215  -
-(<https://github.com/MichaelBurge/pyramid-scheme>) by Michael Burge 
+(<https://github.com/MichaelBurge/pyramid-scheme>) by Michael Burge -
 EXPIRMENTAL, RETIRED
 
 
@@ -41,14 +41,12 @@ EXPIRIMENTAL, RETIRED
 
 ### Low-Level Languages
 
-**LLL** (Lisp-Like Language), see the liblll and lllc folders in the Solidity sources / repo - 
-RETIRED ? (see Yul ?)
-
-
 **Yul** (formerly Julia), 
 see the libyul folder in the Solidity sources / repo 
 and the Yul section in the Solidity programming language reference / docs
 
+**LLL** (Lisp-Like Language), see the liblll and lllc folders in the Solidity sources / repo - 
+RETIRED ? (see Yul ?)
 
 
 
