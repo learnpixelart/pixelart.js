@@ -45,7 +45,7 @@ EXPIRIMENTAL, RETIRED
 see the libyul folder in the Solidity sources / repo 
 and the Yul section in the Solidity programming language reference / docs
 
-**LLL** (Lisp-Like Language), see the liblll and lllc folders in the Solidity sources / repo - 
+**LLL** (Low-level Lisp-like Language), see the liblll and lllc folders in the Solidity sources / repo - 
 RETIRED ? (see Yul ?)
 
 
