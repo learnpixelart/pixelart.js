@@ -1,4 +1,5 @@
 
+
 New to (Secure) Ruby? See the [Red Paper](https://github.com/s6ruby/redpaper)!
 
 
