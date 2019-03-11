@@ -102,12 +102,12 @@ contract SimpleStorage {
 # Zombie Factory Contract
 
 # @sig (uint, string, uint)
-NewZombie = Event.new(:zombie_id, :name, :dna)
+event :NewZombie, :zombie_id, :name, :dna
 
 DNA_DIGITS  = 16
 DNA_MODULUS = 10 ** DNA_DIGITS
 
-Zombie = Struct.new( name: '', dna: 0 )
+struct :Zombie, name: '', dna: 0
 
 def setup
   @zombies = Array.of( Zombie )
