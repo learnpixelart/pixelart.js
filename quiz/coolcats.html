@@ -24,6 +24,7 @@
                 box-shadow: 15px 15px 15px gray;
             }
         </style>
+        <script src="../dataset.js/dataset.js"></script>
         <script src="../pixelart.js/composite.js"></script>
         <script src="../pixelart.js/collection.js"></script>
         <script src="../quiz.js/quiz.js"></script>
@@ -162,12 +163,25 @@ function nextQuestion() {
 document.addEventListener( "DOMContentLoaded", async () => {
 
   const image_url = 'https://github.com/cryptopunksnotdead/awesome-24px/raw/master/collection/coolcats.png'
+  const image =  await ImageComposite.read( image_url );
 
   // note:  github.com request via fetch get blocked by CORS (render.githubcontent.com) or such required ??
-  const dataset_url = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/0-999.csv';
+  const dataset_url1 = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/0-999.csv';
+  const dataset_url2 = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/1000-1999.csv';
+  const dataset_url3 = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/2000-2999.csv';
+  let   dataset  = await Dataset.readCsv( dataset_url1,
+                                           dataset_url2,
+                                           dataset_url3 );
+   // drop the id column
+   dataset = dataset.except( 'id' );
 
-  const col = await Collection.read( image_url, dataset_url );
+/*
+  const col = await Collection.read( image_url,
+                                     dataset_url1,
+                                     dataset_url2 );
+*/
 
+const col = new Collection( image, dataset );
   quiz = new Quiz( col );
 
   nextQuestion();

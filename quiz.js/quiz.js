@@ -29,11 +29,13 @@ constructor( col ) {
    this.ids_by_attributes = new Map();
     for (let i=0; i < this.col.recs.length; i++) {
        let rec = this.col.recs[i];
+       console.log( "rec", rec );
 
        // remove all empty strings
-       rec = rec.filter( val => val != "" );
+       let values = Object.values(rec);
+       values = values.filter( val => val != "" );
 
-       const count = rec.length;
+       const count = values.length;
        // "simulate"   ids_by_attributes[ count] ||= []
        this.ids_by_attributes.set( count, this.ids_by_attributes.get( count ) || [] );
        let ids =  this.ids_by_attributes.get( count );
@@ -117,9 +119,10 @@ is_answer( val )   {
     const answer_id = this.ids[ this.answer ];
 
       // remove all empty strings
-     const rec = this.col.recs[ answer_id ].filter( val => val != "" );
+     let values = Object.values(this.col.recs[ answer_id ] );
+     values = values.filter( val => val != "" );
 
-     const text = rec.join( ' • ' );
+     const text = values.join( ' • ' );
      console.log( "text", text );
      return text;
   }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test dataset.js</title>
+    </head>
+    <script src="../dataset.js"></script>
+    <body>
+<script>
+
+
+async function test() {
+
+// note:  github.com request via fetch get blocked by CORS (render.githubcontent.com) or such required ??
+const dataset_url1 = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/0-999.csv';
+const dataset_url2 = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/1000-1999.csv';
+
+const dataset = await Dataset.readCsv( dataset_url1,
+                                       dataset_url2 );
+
+console.log( dataset.recs.length, " record(s)" );
+console.log( dataset.recs[0] );
+console.log( "values", dataset.recs[0].values );
+console.log( "keys", dataset.recs[0].keys );
+
+console.log( "face", dataset.recs[0].face );
+console.log( "face", dataset.recs[0]['face'] );
+
+console.log( dataset.recs[1] );
+// console.log( dataset.recs );
+
+console.log( dataset.get(0) );
+console.log( dataset.length, " record(s)" );
+console.log( dataset.size, " record(s)" );
+
+
+// {id:      '0',
+//  face:    'angry cute',
+//  hat:     'helm army',
+//  clothes: 'sweater orange'}
+
+const dataset2 = dataset.map( rec => ({
+                                         face:    rec.face,
+                                         hat:     rec.hat,
+                                         clothes: rec.clothes,
+                                         extra:    '???',
+                                      }))
+
+console.log( dataset2.recs[0] );
+console.log( dataset2.recs[1] );
+
+// cut-out id key
+const dataset3 = dataset.except( 'id' );
+console.log( dataset3.recs[0] );
+console.log( dataset3.recs[0].keys );
+
+/*
+for( let rec of dataset.recs ) {
+   console.log( rec );
+}
+*/
+
+console.log( "the end" );
+
+}
+
+test();
+
+
+</script>
+</body>
+</html>
