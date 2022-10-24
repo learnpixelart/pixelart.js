@@ -10,7 +10,7 @@ function parseCsv( str ) {
       if( line.length === 0 || line.startsWith('#') ) {
          continue;
       }
-      values = line.split(',');
+      let values = line.split(',');
 
       values = values.map( val => val.trim() );
       // console.log( values );
