@@ -9,14 +9,14 @@
 <script>
 
 
+
 async function test() {
 
-// note:  github.com request via fetch get blocked by CORS (render.githubcontent.com) or such required ??
-const dataset_url1 = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/0-999.csv';
-const dataset_url2 = 'https://cryptopunksnotdead.github.io/punks.attributes/coolcats/1000-1999.csv';
+const dataset_urls = ['https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/coolcats/0-999.csv',
+                      'https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/coolcats/1000-1999.csv',
+                     ];
 
-const dataset = await Dataset.readCsv( dataset_url1,
-                                       dataset_url2 );
+const dataset = await Dataset.readCsv( ...dataset_urls );
 
 console.log( dataset.recs.length, " record(s)" );
 console.log( dataset.recs[0] );

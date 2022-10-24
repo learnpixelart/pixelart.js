@@ -31,7 +31,7 @@
     </head>
     <body>
 
-      <h1>Welcome to the 24px Cool Cats (Text Prompt-To-Image) Quiz</h1>
+      <h1>Welcome to the 28px Bored Apes (Text Prompt-To-Image) Quiz</h1>
 
       <p style="font-size: 200%;">
          <span id="rounds">Round: ___ </span> /
@@ -162,13 +162,14 @@ function nextQuestion() {
 
 document.addEventListener( "DOMContentLoaded", async () => {
 
-  const image_url = 'https://raw.githubusercontent.com/cryptopunksnotdead/awesome-24px/master/collection/coolcats.png';
-  const image =  await ImageComposite.read( image_url );
+  const image_url = 'https://raw.githubusercontent.com/cryptopunksnotdead/awesome-24px/master/collection/boredapes.png';
+  // note: change default (24x24) tileWidth/Height to 28x28
+  const image =  await ImageComposite.read( image_url, 28, 28 );
 
   const dataset_urls = [
-    'https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/coolcats/0-999.csv',
-    'https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/coolcats/1000-1999.csv',
-    'https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/coolcats/2000-2999.csv',
+    'https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/boredapes/0-999.csv',
+    'https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/boredapes/1000-1999.csv',
+    'https://raw.githubusercontent.com/cryptopunksnotdead/punks.attributes/master/boredapes/2000-2999.csv',
   ];
 
   let dataset  = await Dataset.readCsv( ...dataset_urls );
