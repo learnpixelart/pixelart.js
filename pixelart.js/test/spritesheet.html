@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test spritesheet.js</title>
+    </head>
+    <script src="../../dataset.js/dataset.js"></script>
+    <script src="../composite.js"></script>
+    <script src="../spritesheet.js"></script>
+    <script src="../generator.js"></script>
+    <body>
+
+<h1>Test spritesheet.js</h1>
+
+sprites:
+
+<canvas id="sprite0"></canvas>  /
+<canvas id="sprite1"></canvas>  /
+<canvas id="sprite2"></canvas>
+
+<br>
+
+<canvas id="sprite3"></canvas>  /
+<canvas id="sprite4"></canvas>  /
+<canvas id="sprite5"></canvas>
+
+
+<div>
+  <span class="sprite" data-name="female 2"></span> /
+  <span class="sprite" data-name="male 2"></span> /
+  <span class="sprite" data-name="alien"></span>
+</div>
+
+
+<br>
+
+<canvas id="g0"></canvas>  /
+<canvas id="g1"></canvas>
+
+
+
+<script>
+async function test() {
+
+  const image_url = 'https://raw.githubusercontent.com/cryptopunksnotdead/cryptopunks/master/punks/config/yeoldepunks-24x24.png';
+  const composite = await ImageComposite.read( image_url );
+
+  console.log( `composite  -   ${composite.cols}x${composite.rows} (${composite.width}x${composite.height})` );
+
+  composite.drawCanvas( 0, '#sprite0', 2 );
+  composite.drawCanvas( 1, '#sprite1', 4 );
+  composite.drawCanvas( 2, '#sprite2', 8 );
+
+  composite.pasteCanvas( 27, '#sprite2', 8 );
+  composite.pasteCanvas( 71, '#sprite2', 8 );
+
+
+  const dataset = Dataset.parseCsv( `  id, name
+  0, Male 1
+1, Male 2
+2, Male 3
+3, Male 4
+4, Female 1
+5, Female 2
+6, Female 3
+7, Female 4
+8, Zombie
+9, Ape
+10, Alien
+11, Rosy Cheeks (m)
+12, Luxurious Beard (m)
+13, Clown Hair Green (m)
+14, Mohawk Dark (m)
+`);
+
+  const sheet = new Spritesheet( composite, dataset );
+
+
+  sheet.drawCanvas( 'Female 1', '#sprite3', 2 );
+  sheet.drawCanvas( 'Zombie',   '#sprite4', 4 );
+  sheet.drawCanvas( 'Alien',    '#sprite5', 8 );
+
+  sheet.pasteCanvas( 'Clown Hair Green (m)',  '#sprite4', 4 );
+
+
+
+  sheet.drawSprites();
+
+
+  /////
+  //  test generator
+  const g = Generator.use( sheet );
+
+  g.generate( '#g0', 'Zombie', ' Clown Hair Green (m)' );
+  g.generate( '#g1', 'Male 2', ' Clown Hair Green (m)', 'Luxurious Beard (m)',
+                  { zoom: 8,
+                    background: 'red'} );
+
+
+  console.log( "the end" );
+
+}
+
+test();
+
+
+</script>
+</body>
+</html>

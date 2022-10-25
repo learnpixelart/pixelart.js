@@ -7,7 +7,7 @@ class Generator {
   }
 
   constructor( sheet ) {
-    this.sheet   = sheet;
+    this.sheet = sheet;
   }
 
   generate( sel, ...args ) {
@@ -20,13 +20,12 @@ class Generator {
      }
      console.log( opts );
 
-     let zoom = opts.zoom || 1;
+     let zoom       = opts.zoom || 1;
      let background = opts.background || '#638596';
+
      let names = args;
 
-     console.log( "generate", this.sheet.tileWidth,
-                              this.sheet.tileHeight,
-                              zoom,
+     console.log( `generate  ${this.sheet.tileWidth}x${this.sheet.tileHeight}px@${zoom}x`,
                               names );
 
 
@@ -39,15 +38,15 @@ class Generator {
     canvas.width  = this.sheet.tileWidth*zoom;
     canvas.height = this.sheet.tileHeight*zoom;
 
-    let cx = canvas.getContext( "2d" );
+    let ctx = canvas.getContext( "2d" );
 
-    cx.fillStyle = background;
-    cx.fillRect(0, 0, this.sheet.tileWidth*zoom,
-                      this.sheet.tileHeight*zoom );
+    ctx.fillStyle = background;
+    ctx.fillRect(0, 0, this.sheet.tileWidth*zoom,
+                       this.sheet.tileHeight*zoom );
 
     for( let name of names ) {
        console.log( name );
-       this.sheet.pasteSprite( name, cx, zoom );
+       this.sheet.pasteCtx( name, ctx, zoom );
     }
   }
 }
